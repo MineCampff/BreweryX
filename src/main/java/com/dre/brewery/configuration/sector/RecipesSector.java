@@ -406,4 +406,67 @@ public class RecipesSector extends AbstractOkaeriConfigSector<ConfigRecipe> {
         .effects(List.of("SPEED/2/60-60", "NAUSEA/1/60-60", "HASTE/1/60-60", "NIGHT_VISION/1/60-60"))
         .drinkMessage("Энергия бьёт ключом! Но что-то не так...")
         .build();
+
+    ConfigRecipe wiking_rum = ConfigRecipe.builder()
+        .name("Island rum")
+        .ingredients(List.of("SPRUCE_SAPLING/12", "SWEET_BERRIES/20"))
+        .cookingTime(15)
+        .distillTime(30)
+        .distillRuns(3)
+        .wood(1) // SPRUCE
+        .age(10) // 24 дня
+        .color("PINK")
+        .difficulty(2)
+        .alcohol(70)
+        .effects(List.of("REGENERATION/1/45","STRENGTH/2/45"))
+        .build();
+
+    ConfigRecipe icelandic_tea = ConfigRecipe.builder()
+        .name("§l§fИсландский чай")
+        .ingredients(List.of("SPRUCE_LEAVES/5", "SPRUCE_SAPLING/2", "CAMOMILE/1"))
+        .cookingTime(5)
+        .wood(1) // еловая бочка
+        .age(0)
+        .distillRuns(0)
+        .color("LIGHT_BLUE")
+        .difficulty(3)
+        .effects(List.of("NIGHT_VISION/1/30", "FAST_DIGGING/1/15"))
+        .build();
+
+    ConfigRecipe golden_cup = ConfigRecipe.builder()
+        .name("§l§6Золотая чаша")
+        .ingredients(List.of("GOLD_NUGGET/5", "OAK_LEAVES/10", "OAK_SAPLING/2"))
+        .cookingTime(5)
+        .wood(2) // дубовая бочка
+        .age(0)
+        .distillRuns(0)
+        .color("GOLD")
+        .difficulty(4)
+        .effects(List.of("NIGHT_VISION/1/25", "LUCK/1/7", "RESISTANCE/1/40"))
+        .build();
+
+    ConfigRecipe sakura_strong_tea = ConfigRecipe.builder()
+        .name("§l§dСакуровый крепкий чай")
+        .ingredients(List.of("CHERRY_LEAVES/10", "CHERRY_SAPLING/5", "ALLIUM/2"))
+        .cookingTime(7)
+        .wood(2) // дубовая бочка (можно заменить на любой другой вид)
+        .age(0)
+        .distillRuns(0)
+        .color("PINK")
+        .difficulty(4)
+        .effects(List.of("HEAL/1/15", "SPEED/1/15"))
+        .build();
+
+    ConfigRecipe dark_gray_tea = ConfigRecipe.builder()
+        .name("Тёмно серый чай")
+        .ingredients(List.of("CLOSED_EYE/2", "GRAY_OAK_LEAVES/10"))
+        .cookingTime(10)
+        .wood(4) // тёмный дуб
+        .age(0)
+        .distillRuns(0)
+        .color("GRAY")
+        .difficulty(5)
+        .effects(List.of("INVISIBILITY/1/30", "BLINDNESS/1/45"))
+        .build();
+
 }
