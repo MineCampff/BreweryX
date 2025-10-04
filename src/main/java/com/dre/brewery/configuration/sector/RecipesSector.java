@@ -338,4 +338,72 @@ public class RecipesSector extends AbstractOkaeriConfigSector<ConfigRecipe> {
         .alcohol(-8)
         .effects(List.of("REGENERATION/30", "SPEED/10"))
         .build();
+
+    // Custom Recipes
+    ConfigRecipe umbra_ignite = ConfigRecipe.builder()
+        .name("Umbra Ignite")
+        .ingredients(List.of("BLUE_ORCHID/1", "MELON/1", "ROTTEN_FLESH/12", "IRON_INGOT/1"))
+        .cookingTime(6)
+        .wood(6) // DARK_OAK
+        .age(4) // 4 дня
+        .color("PURPLE")
+        .difficulty(3)
+        .alcohol(15)
+        .effects(List.of("POISON/2/2-2", "RESISTANCE/1/60-60", "NAUSEA/1/30-30", "NIGHT_VISION/1/30-30", "HUNGER/1/15-15"))
+        .drinkMessage("Восполнение тени")
+        .build();
+
+    ConfigRecipe lord_wine = ConfigRecipe.builder()
+        .name("Lord Wine")
+        .ingredients(List.of("OAK_LEAVES/3", "SWEET_BERRIES/14"))
+        .cookingTime(5)
+        .wood(2) // OAK
+        .age(24) // 24 дня
+        .color("PINK")
+        .difficulty(2)
+        .alcohol(8)
+        .effects(List.of("REGENERATION/2/4-4", "LEVITATION/1/4-4"))
+        .drinkMessage("Пусть приветствует Милорд")
+        .build();
+
+    ConfigRecipe lord_brandy = ConfigRecipe.builder()
+        .name("Lord Brandy")
+        .ingredients(List.of("OAK_LEAVES/3", "SWEET_BERRIES/14"))
+        .cookingTime(5)
+        .distillRuns(4)
+        .distillTime(30)
+        .wood(2) // OAK
+        .age(24) // 24 дня
+        .color("PINK")
+        .difficulty(3)
+        .alcohol(24)
+        .effects(List.of("REGENERATION/2/4-4", "LEVITATION/1/4-4"))
+        .drinkMessage("Розовый лорд на месте!")
+        .build();
+
+    ConfigRecipe forgotten_wine = ConfigRecipe.builder()
+        .name("Forgotten Wine")
+        .ingredients(List.of("SWEET_BERRIES/10", "MELON_SLICE/2", "STRING/5"))
+        .cookingTime(23)
+        .wood(6) // DARK_OAK
+        .age(65) // 65 дней
+        .color("RED")
+        .difficulty(5)
+        .alcohol(35)
+        .effects(List.of("REGENERATION/2/30-30", "HUNGER/1/60-60", "ABSORPTION/1/30-30", "HERO_OF_THE_VILLAGE/1/300-300"))
+        .drinkMessage("Один глоток этого вина, может превратить того кто его выпил, в сильное существо наподобие лесных ягод")
+        .build();
+
+    ConfigRecipe metamphetamine = ConfigRecipe.builder()
+        .name("Metamphetamine")
+        .ingredients(List.of("SUGAR/1", "RED_DYE/1", "IRON_INGOT/1"))
+        .cookingTime(5)
+        .wood(2) // OAK
+        .age(7) // 7 дней
+        .color("CYAN")
+        .difficulty(2)
+        .alcohol(20)
+        .effects(List.of("SPEED/2/60-60", "NAUSEA/1/60-60", "HASTE/1/60-60", "NIGHT_VISION/1/60-60"))
+        .drinkMessage("Энергия бьёт ключом! Но что-то не так...")
+        .build();
 }

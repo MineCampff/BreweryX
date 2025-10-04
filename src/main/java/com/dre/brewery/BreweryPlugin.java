@@ -47,7 +47,10 @@ import com.dre.brewery.listeners.CauldronListener;
 import com.dre.brewery.listeners.EntityListener;
 import com.dre.brewery.listeners.InventoryListener;
 import com.dre.brewery.listeners.PlayerListener;
+import com.dre.brewery.recipe.BRecipe;
 import com.dre.brewery.recipe.CustomItem;
+import com.dre.brewery.configuration.sector.RecipesSector;
+import com.dre.brewery.configuration.sector.capsule.ConfigRecipe;
 import com.dre.brewery.recipe.Ingredient;
 import com.dre.brewery.recipe.ItemLoader;
 import com.dre.brewery.recipe.PluginItem;
@@ -119,7 +122,12 @@ public final class BreweryPlugin extends JavaPlugin {
 
         if (getMCVersion().isOrLater(MinecraftVersion.V1_14)) {
             // Campfires are weird. Initialize once now, so it doesn't lag later when we check for campfires under Cauldrons
-            getServer().createBlockData(Material.CAMPFIRE);
+            try {
+                Material.valueOf("CAMPFIRE");
+                // Just check if the material exists, no need to create block data
+            } catch (IllegalArgumentException e) {
+                // CAMPFIRE not available in this version
+            }
         }
     }
 
@@ -152,6 +160,32 @@ public final class BreweryPlugin extends JavaPlugin {
         ConfigManager.loadRecipes();
         ConfigManager.loadDistortWords();
         ConfigManager.loadSeed();
+        
+        // Регистрируем кастомные рецепты алкоголя
+        // Убеждаемся, что рецепты из RecipesSector загружены
+        Logging.log("Current recipes loaded: " + BRecipe.getAllRecipes().size());
+        
+        // Принудительно загружаем рецепты из RecipesSector
+        RecipesSector sector = new RecipesSector();
+        Map<String, ConfigRecipe> recipes = sector.getCapsules();
+        int loadedCount = 0;
+        for (var entry : recipes.entrySet()) {
+            BRecipe recipe = BRecipe.fromConfig(entry.getKey(), entry.getValue());
+            if (recipe != null && recipe.isValid()) {
+                // Проверяем, не загружен ли уже этот рецепт
+                boolean alreadyExists = BRecipe.getAllRecipes().stream()
+                    .anyMatch(r -> r.getRecipeName().equals(recipe.getRecipeName()));
+                if (!alreadyExists) {
+                    BRecipe.getAllRecipes().add(recipe);
+                    loadedCount++;
+                }
+            } else {
+                Logging.warningLog("Failed to load recipe: " + entry.getKey());
+            }
+        }
+        BRecipe.setNumConfigRecipes(BRecipe.getAllRecipes().size());
+        Logging.log("Loaded " + loadedCount + " additional recipes from RecipesSector. Total: " + BRecipe.getAllRecipes().size());
+        
         this.breweryStats = new BreweryStats(); // Load metrics
 
 

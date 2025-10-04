@@ -90,6 +90,36 @@ public class RecipeTests {
         BreweryApi.addCauldronRecipe(r, false);
     }
 
+    /**
+     * Тестирует кастомные рецепты алкоголя
+     */
+    @Test
+    public void testCustomAlcoholRecipes() {
+        // Тестируем кастомные рецепты из RecipesSector
+        testRecipeExists("Umbra Ignite");
+        testRecipeExists("Lord Wine");
+        testRecipeExists("Lord Brandy");
+        testRecipeExists("Forgotten Wine");
+        testRecipeExists("Metamphetamine");
+    }
+
+    /**
+     * Проверяет существование рецепта по имени
+     */
+    private static void testRecipeExists(String recipeName) {
+        BRecipe recipe = BreweryApi.getRecipe(recipeName);
+        if (recipe != null) {
+            Logging.log("✓ Рецепт '" + recipeName + "' успешно зарегистрирован");
+            Logging.log("  - Ингредиенты: " + recipe.getIngredients().size());
+            Logging.log("  - Время готовки: " + recipe.getCookingTime() + " минут");
+            Logging.log("  - Время настаивания: " + recipe.getAge() + " дней");
+            Logging.log("  - Алкоголь: " + recipe.getAlcohol() + "ml");
+            Logging.log("  - Эффекты: " + recipe.getEffects().size());
+        } else {
+            Logging.log("✗ Рецепт '" + recipeName + "' не найден!");
+        }
+    }
+
     public static void onClick() {
 		/*try {
 			DataInputStream in = new DataInputStream(new Base91DecoderStream(new LoreLoadStream(potion)));
